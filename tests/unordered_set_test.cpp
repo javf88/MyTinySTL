@@ -187,5 +187,11 @@ void unordered_multiset_test()
 } // namespace unordered_set_test
 } // namespace test
 } // namespace mystl
+
+int main()
+{
+    mystl::test::unordered_set_test::unordered_set_test();
+    mystl::test::unordered_set_test::unordered_multiset_test();
+}
 #endif // !MYTINYSTL_UNORDERED_SET_TEST_H_
 
