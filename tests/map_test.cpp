@@ -198,5 +198,11 @@ void multimap_test()
 } // namespace map_test
 } // namespace test
 } // namespace mystl
+
+int main()
+{
+    mystl::test::map_test::map_test();
+    mystl::test::map_test::multimap_test();
+}
 #endif // !MYTINYSTL_MAP_TEST_H_
 

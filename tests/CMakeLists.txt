@@ -17,6 +17,9 @@ add_executable(iterators
 add_executable(list
     list_test.cpp)
 
+add_executable(map
+    map_test.cpp)
+
 # Adding original monolithic test
 add_executable(stlTest
     test.cpp)
