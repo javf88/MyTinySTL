@@ -29,6 +29,9 @@ add_executable(set
 add_executable(stack
     stack_test.cpp)
 
+add_executable(string
+    string_test.cpp)
+
 # Adding original monolithic test
 add_executable(stlTest
     test.cpp)

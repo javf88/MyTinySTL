@@ -204,4 +204,10 @@ void string_test()
 } // namespace string_test
 } // namespace test
 } // namespace mystl
+
+int main()
+{
+    mystl::test::string_test::string_test();
+}
+
 #endif // !MYTINYSTL_STRING_TEST_H_
