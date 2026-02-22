@@ -182,5 +182,11 @@ void priority_test()
 } // namespace queue_test
 } // namespace test
 } // namespace mystl
+
+int main()
+{
+    mystl::test::queue_test::priority_test();
+    mystl::test::queue_test::queue_test();
+}
 #endif // !MYTINYSTL_QUEUE_TEST_H_
 

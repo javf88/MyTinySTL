@@ -20,6 +20,9 @@ add_executable(list
 add_executable(map
     map_test.cpp)
 
+add_executable(queue
+    queue_test.cpp)
+
 # Adding original monolithic test
 add_executable(stlTest
     test.cpp)
