@@ -40,3 +40,8 @@ void stream_iterator_test()
 } // namespace mystl
 #endif // !MYTINYSTL_STREAM_ITERATOR_TEST_H_
 
+int main()
+{
+    mystl::test::iterator_test::stream_iterator_test();
+    return 0;
+}
