@@ -98,5 +98,9 @@ void deque_test()
 } // namespace deque_test
 } // namespace test
 } // namespace mystl
+int main()
+{
+    mystl::test::deque_test::deque_test();
+}
 #endif // !MYTINYSTL_DEQUE_TEST_H_
 

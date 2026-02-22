@@ -8,6 +8,9 @@ add_executable(algorithm
 add_executable(performance
     algorithm_performance_test.cpp)
 
+add_executable(deque
+    deque_test.cpp)
+
 add_executable(iterators
     iterator_test.cpp)
 
