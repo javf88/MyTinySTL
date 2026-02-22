@@ -104,5 +104,12 @@ void algorithm_performance_test()
 } // namespace algorithm_performance_test
 } // namespace test
 } // namespace mystl
+
+int main()
+{
+    mystl::test::algorithm_performance_test::binary_search_test();
+    mystl::test::algorithm_performance_test::sort_test();
+    mystl::test::algorithm_performance_test::algorithm_performance_test();
+}
 #endif // !MYTINYSTL_ALGORITHM_PERFORMANCE_TEST_H_
 

@@ -1177,4 +1177,10 @@ TEST(upper_bound_test)
 
 } // namespace test
 } // namespace mystl
+
+int main()
+{
+    // this is too weird, we need to remove macros!
+//    mystl::test::upper_bound_test();
+}
 #endif // !MYTINYSTL_ALGORITHM_TEST_H_

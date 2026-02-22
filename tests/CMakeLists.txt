@@ -2,6 +2,12 @@
 # Define tests
 #*******************************************************************************
 
+add_executable(algorithm
+    algorithm_test.cpp)
+
+add_executable(performance
+    algorithm_performance_test.cpp)
+
 add_executable(iterators
     iterator_test.cpp)
 
