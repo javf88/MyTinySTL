@@ -26,6 +26,9 @@ add_executable(queue
 add_executable(set
     set_test.cpp)
 
+add_executable(stack
+    stack_test.cpp)
+
 # Adding original monolithic test
 add_executable(stlTest
     test.cpp)

@@ -99,5 +99,10 @@ void stack_test()
 } // namespace stack_test
 } // namespace test
 } // namespace mystl
+
+int main()
+{
+    mystl::test::stack_test::stack_test();
+}
 #endif // !MYTINYSTL_STACK_TEST_H_
 
