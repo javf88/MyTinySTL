@@ -114,5 +114,10 @@ void list_test()
 } // namespace list_test
 } // namespace test
 } // namespace mystl
+
+int main()
+{
+    mystl::test::list_test::list_test();
+}
 #endif // !MYTINYSTL_LIST_TEST_H_
 
