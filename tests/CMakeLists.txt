@@ -32,6 +32,9 @@ add_executable(stack
 add_executable(string
     string_test.cpp)
 
+add_executable(unordered_map
+    unordered_map_test.cpp)
+
 # Adding original monolithic test
 add_executable(stlTest
     test.cpp)

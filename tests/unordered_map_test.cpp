@@ -199,5 +199,11 @@ void unordered_multimap_test()
 } // namespace unordered_map_test
 } // namespace test
 } // namespace mystl
+
+int main()
+{
+    mystl::test::unordered_map_test::unordered_map_test();
+    mystl::test::unordered_map_test::unordered_multimap_test();
+}
 #endif // !MYTINYSTL_UNORDERED_MAP_TEST_H_
 
