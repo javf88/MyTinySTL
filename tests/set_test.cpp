@@ -162,5 +162,11 @@ void multiset_test()
 } // namespace set_test
 } // namespace test
 } // namespace mystl
+
+int main()
+{
+    mystl::test::set_test::set_test();
+    mystl::test::set_test::multiset_test();
+}
 #endif // !MYTINYSTL_SET_TEST_H_
 

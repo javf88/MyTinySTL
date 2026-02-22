@@ -23,6 +23,9 @@ add_executable(map
 add_executable(queue
     queue_test.cpp)
 
+add_executable(set
+    set_test.cpp)
+
 # Adding original monolithic test
 add_executable(stlTest
     test.cpp)
