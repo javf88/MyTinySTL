@@ -38,6 +38,9 @@ add_executable(unordered_map
 add_executable(unordered_set
     unordered_set_test.cpp)
 
+add_executable(vector
+    vector_test.cpp)
+
 # Adding original monolithic test
 add_executable(stlTest
     test.cpp)

@@ -110,5 +110,10 @@ void vector_test()
 } // namespace vector_test
 } // namespace test
 } // namespace mystl
+
+int main()
+{
+    mystl::test::vector_test::vector_test();
+}
 #endif // !MYTINYSTL_VECTOR_TEST_H_
 
