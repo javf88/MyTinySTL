@@ -5,7 +5,7 @@
 
 #include <queue>
 
-#include "../MyTinySTL/queue.h"
+#include "../src/queue.h"
 #include "test.h"
 
 namespace mystl

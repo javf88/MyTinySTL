@@ -5,8 +5,8 @@
 
 #include <map>
 
-#include "../MyTinySTL/map.h"
-#include "../MyTinySTL/vector.h"
+#include "../src/map.h"
+#include "../src/vector.h"
 #include "test.h"
 
 namespace mystl

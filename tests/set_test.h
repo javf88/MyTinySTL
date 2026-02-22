@@ -5,7 +5,7 @@
 
 #include <set>
 
-#include "../MyTinySTL/set.h"
+#include "../src/set.h"
 #include "test.h"
 
 namespace mystl

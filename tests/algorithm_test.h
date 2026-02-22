@@ -7,8 +7,8 @@
 #include <functional>
 #include <numeric>
 
-#include "../MyTinySTL/algorithm.h"
-#include "../MyTinySTL/vector.h"
+#include "../src/algorithm.h"
+#include "../src/vector.h"
 #include "test.h"
 
 namespace mystl

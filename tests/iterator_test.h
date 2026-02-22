@@ -2,8 +2,8 @@
 #define MYTINYSTL_ITERATOR_TEST_H_
 
 #include "test.h"
-#include "../MyTinySTL/iterator.h"
-#include "../MyTinySTL/stream_iterator.h"
+#include "../src/iterator.h"
+#include "../src/stream_iterator.h"
 
 namespace mystl
 {
