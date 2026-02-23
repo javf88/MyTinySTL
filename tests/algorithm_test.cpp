@@ -6,15 +6,144 @@
 #include <algorithm>
 #include <functional>
 #include <numeric>
+#include <iostream>
 
 #include "../src/algorithm.h"
 #include "../src/vector.h"
-#include "test.h"
 
 namespace mystl
 {
 namespace test
 {
+
+class TestCase
+{
+public:
+  TestCase(const char* case_name) : testcase_name(case_name) {}
+
+  virtual void Run() = 0;
+
+public:
+  const char* testcase_name;
+  int         nTestResult;
+  double      nFailed;
+  double      nPassed;
+};
+
+
+class UnitTest
+{
+public:
+  static UnitTest* GetInstance();
+
+  TestCase* RegisterTestCase(TestCase* testcase);
+
+  void Run();
+
+public:
+  TestCase* CurrentTestCase;          // 当前执行的测试案例
+  double    nPassed;                  // 通过案例数
+  double    nFailed;                  // 失败案例数
+
+protected:
+  std::vector<TestCase*> testcases_;  // 保存案例集合
+};
+
+UnitTest* UnitTest::GetInstance()
+{
+  static UnitTest instance;
+  return &instance;
+}
+
+TestCase* UnitTest::RegisterTestCase(TestCase* testcase)
+{
+  testcases_.push_back(testcase);
+  return testcase;
+}
+
+void UnitTest::Run()
+{
+  for (auto it : testcases_)
+  {
+    TestCase* testcase = it;
+    CurrentTestCase = testcase;
+    testcase->nTestResult = 1;
+    testcase->nFailed = 0;
+    testcase->nPassed = 0;
+    std::cout << "============================================\n";
+    std::cout << " Run TestCase:" << testcase->testcase_name << "\n";
+    testcase->Run();
+    std::cout << " " << testcase->nPassed << " / " << testcase->nFailed + testcase->nPassed
+      << " Cases passed. ( " << testcase->nPassed / 
+      (testcase->nFailed + testcase->nPassed) * 100 << "% )\n";
+    std::cout << " End TestCase:" << testcase->testcase_name << "\n";
+    if (testcase->nTestResult)
+      ++nPassed;
+    else
+      ++nFailed;
+  }
+  std::cout << "============================================\n";
+  std::cout << " Total TestCase : " << nPassed + nFailed << "\n";
+  std::cout << " Total Passed : " << nPassed << "\n";
+  std::cout << " Total Failed : " << nFailed << "\n";
+  std::cout << " " << nPassed << " / " << nFailed + nPassed
+    << " TestCases passed. ( " << nPassed / (nFailed + nPassed) * 100 << "% )\n";
+}
+
+#define TEST(testcase_name) \
+  MYTINYSTL_TEST_(testcase_name)
+
+#define TESTCASE_NAME(testcase_name) \
+    testcase_name##_TEST
+
+#define MYTINYSTL_TEST_(testcase_name)                        \
+class TESTCASE_NAME(testcase_name) : public TestCase {        \
+public:                                                       \
+    TESTCASE_NAME(testcase_name)(const char* case_name)       \
+        : TestCase(case_name) {};                             \
+    virtual void Run();                                       \
+private:                                                      \
+    static TestCase* const testcase_;                         \
+};                                                            \
+                                                              \
+TestCase* const TESTCASE_NAME(testcase_name)                  \
+    ::testcase_ = UnitTest::GetInstance()->RegisterTestCase(  \
+        new TESTCASE_NAME(testcase_name)(#testcase_name));    \
+void TESTCASE_NAME(testcase_name)::Run()
+
+#define EXPECT_CON_EQ(c1, c2) do {                                  \
+  auto first1 = std::begin(c1), last1 = std::end(c1);               \
+  auto first2 = std::begin(c2), last2 = std::end(c2);               \
+  for (; first1 != last1 && first2 != last2; ++first1, ++first2) {  \
+    if (*first1 != *first2)  break;                                 \
+  }                                                                 \
+  if (first1 == last1 && first2 == last2) {                         \
+    UnitTest::GetInstance()->CurrentTestCase->nPassed++;            \
+    std::cout << " EXPECT_CON_EQ succeeded!\n";            \
+  }                                                                 \
+  else {                                                            \
+    UnitTest::GetInstance()->CurrentTestCase->nTestResult = 0;      \
+    UnitTest::GetInstance()->CurrentTestCase->nFailed++;            \
+    std::cout << " EXPECT_CON_EQ failed!\n";                 \
+    std::cout << " Expect:" << *first1 << "\n";              \
+    std::cout << " Actual:" << *first2 << "\n";              \
+}} while(0)
+
+#define EXPECT_CON_NE(c1, c2) do {                                  \
+  auto first1 = std::begin(c1), last1 = std::end(c1);               \
+  auto first2 = std::begin(c2), last2 = std::end(c2);               \
+  for (; first1 != last1 && first2 != last2; ++first1, ++first2) {  \
+    if (*first1 != *first2)  break;                                 \
+  }                                                                 \
+  if (first1 != last1 || first2 != last2) {                         \
+    UnitTest::GetInstance()->CurrentTestCase->nPassed++;            \
+    std::cout << " EXPECT_CON_NE succeeded!\n";            \
+  }                                                                 \
+  else {                                                            \
+    UnitTest::GetInstance()->CurrentTestCase->nTestResult = 0;      \
+    UnitTest::GetInstance()->CurrentTestCase->nFailed++;            \
+    std::cout << " EXPECT_CON_NE failed!\n";                 \
+}} while(0)
 
 #ifdef max
 #pragma message("#undefing marco max")
@@ -30,6 +159,43 @@ namespace test
 #pragma warning(push)
 #pragma warning(disable: 4389)
 #endif // _MSC_VER
+
+#define EXPECT_EQ(v1, v2) do { \
+  if (v1 == v2) {                                               \
+    UnitTest::GetInstance()->CurrentTestCase->nPassed++;        \
+    std::cout << " EXPECT_EQ succeeded!\n";            \
+  }                                                             \
+  else {                                                        \
+    UnitTest::GetInstance()->CurrentTestCase->nTestResult = 0;  \
+    UnitTest::GetInstance()->CurrentTestCase->nFailed++;        \
+    std::cout << " EXPECT_EQ failed!\n";                 \
+    std::cout << " Expect:" << v1 << "\n";               \
+    std::cout << " Actual:" << v2 << "\n";               \
+}} while(0)
+
+#define EXPECT_PTR_EQ(p1, p2) do {                              \
+  if (*p1 == *p2) {                                             \
+    UnitTest::GetInstance()->CurrentTestCase->nPassed++;        \
+    std::cout << " EXPECT_PTR_EQ succeeded!\n";        \
+  }                                                             \
+  else {                                                        \
+    UnitTest::GetInstance()->CurrentTestCase->nTestResult = 0;  \
+    UnitTest::GetInstance()->CurrentTestCase->nFailed++;        \
+    std::cout << " EXPECT_PTR_EQ failed!\n";             \
+    std::cout << " Expect:" << *p1 << "\n";              \
+    std::cout << " Actual:" << *p2 << "\n";              \
+}} while(0)
+
+#define EXPECT_TRUE(Condition) do {                             \
+  if (Condition) {                                              \
+    UnitTest::GetInstance()->CurrentTestCase->nPassed++;        \
+    std::cout << " EXPECT_TRUE succeeded!\n";          \
+  }                                                             \
+  else {                                                        \
+    UnitTest::GetInstance()->CurrentTestCase->nTestResult = 0;  \
+    UnitTest::GetInstance()->CurrentTestCase->nFailed++;        \
+    std::cout << " EXPECT_TRUE failed!\n";               \
+}} while(0)
 
 namespace algorithm_test
 {
