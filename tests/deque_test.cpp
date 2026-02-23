@@ -4,9 +4,10 @@
 // deque test : 测试 deque 的接口和 push_front/push_back 的性能
 
 #include <deque>
+#include <iostream>
 
 #include "../src/deque.h"
-#include "test.h"
+//#include "test.h"
 
 namespace mystl
 {
@@ -14,6 +15,28 @@ namespace test
 {
 namespace deque_test
 {
+
+#define FUN_AFTER(con, fun) do {                         \
+  std::string fun_name = #fun;                           \
+  std::cout << " After " << fun_name << " :\n";          \
+  fun;                                                   \
+  COUT(con);                                             \
+} while(0)
+
+#define FUN_VALUE(fun) do {                              \
+  std::string fun_name = #fun;                           \
+  std::cout << " " << fun_name << " : " << fun << "\n";  \
+} while(0)
+
+#define COUT(container) do {                             \
+  std::string con_name = #container;                     \
+  std::cout << " " << con_name << " :";                  \
+  for (auto it : container)                              \
+    std::cout << " " << it;                              \
+  std::cout << "\n";                                     \
+} while(0)
+
+#define PASSED    std::cout << "[ PASSED ]\n"
 
 void deque_test()
 {
