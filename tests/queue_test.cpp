@@ -3,6 +3,7 @@
 
 // queue test : 测试 queue, priority_queue 的接口和它们 push 的性能
 
+#include <gtest/gtest.h>
 #include <queue>
 #include <iostream>
 
@@ -190,7 +191,7 @@ void priority_test()
 } // namespace test
 } // namespace mystl
 
-int main()
+TEST(queue,test)
 {
     mystl::test::queue_test::priority_test();
     mystl::test::queue_test::queue_test();

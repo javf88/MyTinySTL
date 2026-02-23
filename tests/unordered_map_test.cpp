@@ -3,6 +3,7 @@
 
 // unordered_map test : 测试 unordered_map, unordered_multimap 的接口与它们 insert 的性能
 
+#include <gtest/gtest.h>
 #include <iostream>
 #include <unordered_map>
 
@@ -228,7 +229,7 @@ void unordered_multimap_test()
 } // namespace test
 } // namespace mystl
 
-int main()
+TEST(unorderedMap,test)
 {
     mystl::test::unordered_map_test::unordered_map_test();
     mystl::test::unordered_map_test::unordered_multimap_test();

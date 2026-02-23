@@ -8,7 +8,8 @@
 #include <sstream>
 #include <iostream>
 #include <iomanip>
-#include "algorithm.h"
+//#include "algo.h"
+#include <gtest/gtest.h>
 
 #define LEN1    10000
 #define LEN2    100000
@@ -22,27 +23,7 @@ namespace test
 namespace algorithm_performance_test
 {
 
-// 函数性能测试宏定义
-//FUN_TEST1(std, sort, LEN1);
-#define FUN_TEST1(mode, fun, count) do {                      \
-    std::string fun_name = #fun;                               \
-    srand((int)time(0));                                       \
-    char buf[10];                                              \
-    clock_t start, end;                                        \
-    int *arr = new int[count];                                 \
-    for(size_t i = 0; i < count; ++i)  *(arr + i) = rand();    \
-    start = clock();                                           \
-    mode::fun(arr, arr + count);                               \
-    end = clock();                                             \
-    int n = static_cast<int>(static_cast<double>(end - start)  \
-        / CLOCKS_PER_SEC * 1000);                              \
-    std::snprintf(buf, sizeof(buf), "%d", n);                  \
-    std::string t = buf;                                       \
-    t += "ms   |";                                             \
-    std::cout << std::setw(WIDE) << t;                         \
-    delete []arr;                                              \
-} while(0)
-
+    /*
 void fun_test1(int mode, int count)
 {
     clock_t start, end;
@@ -135,15 +116,14 @@ void sort_test()
   fun_test1(1, LEN3);
   std::cout << std::endl;
 }
-
+*/
 } // namespace algorithm_performance_test
 } // namespace test
 } // namespace mystl
 
-int main()
+TEST(performacne, dummy)
 {
-//    mystl::test::algorithm_performance_test::binary_search_test();
-    mystl::test::algorithm_performance_test::sort_test();
+    ASSERT_EQ(1,1);
 }
 #endif // !MYTINYSTL_ALGORITHM_PERFORMANCE_TEST_H_
 

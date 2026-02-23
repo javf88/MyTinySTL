@@ -3,6 +3,7 @@
 
 // list test : 测试 list 的接口与 insert, sort 的性能
 
+#include <gtest/gtest.h>
 #include <list>
 #include <iostream>
 
@@ -137,7 +138,7 @@ void list_test()
 } // namespace test
 } // namespace mystl
 
-int main()
+TEST(list,test)
 {
     mystl::test::list_test::list_test();
 }

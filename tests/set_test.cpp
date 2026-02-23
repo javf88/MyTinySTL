@@ -3,6 +3,7 @@
 
 // set test : 测试 set, multiset 的接口与它们 insert 的性能
 
+#include <gtest/gtest.h>
 #include <set>
 #include <iostream>
 
@@ -196,7 +197,7 @@ void multiset_test()
 } // namespace test
 } // namespace mystl
 
-int main()
+TEST(set,test)
 {
     mystl::test::set_test::set_test();
     mystl::test::set_test::multiset_test();

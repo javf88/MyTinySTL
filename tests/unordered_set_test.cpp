@@ -3,6 +3,7 @@
 
 // unordered_set test : 测试 unordered_set, unordered_multiset 的接口与它们 insert 的性能
 
+#include <gtest/gtest.h>
 #include <unordered_set>
 #include <iostream>
 
@@ -209,7 +210,7 @@ void unordered_multiset_test()
 } // namespace test
 } // namespace mystl
 
-int main()
+TEST(unorderedSet,test)
 {
     mystl::test::unordered_set_test::unordered_set_test();
     mystl::test::unordered_set_test::unordered_multiset_test();

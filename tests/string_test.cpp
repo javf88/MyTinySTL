@@ -3,6 +3,7 @@
 
 // string test : 测试 string 的接口和 insert 的性能
 
+#include <gtest/gtest.h>
 #include <string>
 
 #include "../src/astring.h"
@@ -234,7 +235,7 @@ void string_test()
 } // namespace test
 } // namespace mystl
 
-int main()
+TEST(string,test)
 {
     mystl::test::string_test::string_test();
 }

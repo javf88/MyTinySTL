@@ -3,6 +3,7 @@
 
 // map test : 测试 map, multimap 的接口与它们 insert 的性能
 
+#include <gtest/gtest.h>
 #include <map>
 #include <iostream>
 
@@ -206,7 +207,8 @@ void multimap_test()
 } // namespace test
 } // namespace mystl
 
-int main()
+
+TEST(map,test)
 {
     mystl::test::map_test::map_test();
     mystl::test::map_test::multimap_test();

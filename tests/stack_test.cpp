@@ -4,6 +4,7 @@
 // stack test : 测试 stack 的接口 和 push 的性能
 
 #include <stack>
+#include <gtest/gtest.h>
 #include <iostream>
 
 #include "../src/stack.h"
@@ -118,7 +119,7 @@ void stack_test()
 } // namespace test
 } // namespace mystl
 
-int main()
+TEST(stack,test)
 {
     mystl::test::stack_test::stack_test();
 }

@@ -3,6 +3,7 @@
 
 // vector test : 测试 vector 的接口与 push_back 的性能
 
+#include <gtest/gtest.h>
 #include <vector>
 
 #include "../src/vector.h"
@@ -144,7 +145,7 @@ void vector_test()
 } // namespace test
 } // namespace mystl
 
-int main()
+TEST(vector, test)
 {
     mystl::test::vector_test::vector_test();
 }

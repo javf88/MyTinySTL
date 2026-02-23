@@ -3,10 +3,11 @@
 
 // deque test : 测试 deque 的接口和 push_front/push_back 的性能
 
+#include <gtest/gtest.h>
 #include <deque>
 #include <iostream>
 
-#include "../src/deque.h"
+#include "deque.h"
 
 namespace mystl
 {
@@ -120,7 +121,8 @@ void deque_test()
 } // namespace deque_test
 } // namespace test
 } // namespace mystl
-int main()
+
+TEST(deque,test)
 {
     mystl::test::deque_test::deque_test();
 }

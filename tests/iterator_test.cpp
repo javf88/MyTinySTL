@@ -1,6 +1,7 @@
 #ifndef MYTINYSTL_ITERATOR_TEST_H_
 #define MYTINYSTL_ITERATOR_TEST_H_
 
+#include <gtest/gtest.h>
 #include <sstream>
 #include "../src/iterator.h"
 #include "../src/stream_iterator.h"
@@ -42,8 +43,7 @@ void stream_iterator_test()
 } // namespace mystl
 #endif // !MYTINYSTL_STREAM_ITERATOR_TEST_H_
 
-int main()
+TEST(StreamIterator,test)
 {
     mystl::test::iterator_test::stream_iterator_test();
-    return 0;
 }
