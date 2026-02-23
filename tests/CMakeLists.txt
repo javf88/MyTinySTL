@@ -2,11 +2,25 @@
 # Define tests
 #*******************************************************************************
 
+# algorithm
 add_executable(algorithm
     algorithm_test.cpp)
 
+target_link_libraries(algorithm
+    PRIVATE GTest::gtest_main
+    PRIVATE MyTinySTL)
+
+gtest_add_tests(TARGET algorithm)
+
+# performance
 add_executable(performance
     algorithm_performance_test.cpp)
+
+target_link_libraries(performance
+    PRIVATE GTest::gtest_main
+    PRIVATE MyTinySTL)
+
+gtest_add_tests(TARGET performance)
 
 add_executable(deque
     deque_test.cpp)
