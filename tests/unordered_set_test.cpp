@@ -6,7 +6,6 @@
 #include <unordered_set>
 
 #include "../src/unordered_set.h"
-#include "set_test.h"
 #include "test.h"
 
 namespace mystl
