@@ -4,9 +4,10 @@
 // stack test : 测试 stack 的接口 和 push 的性能
 
 #include <stack>
+#include <iostream>
 
 #include "../src/stack.h"
-#include "test.h"
+//#include "test.h"
 
 namespace mystl
 {
@@ -24,6 +25,24 @@ void stack_print(mystl::stack<int> s)
   }
   std::cout << std::endl;
 }
+
+#define PASSED    std::cout << "[ PASSED ]\n"
+
+#define CON_TEST_P1(con, fun, arg, len1, len2, len3)         \
+  TEST_LEN(len1, len2, len3, WIDE);                          \
+  std::cout << "|         std         |";                    \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len1);                \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len2);                \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len3);                \
+  std::cout << "\n|        mystl        |";                  \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len1);              \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len2);              \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len3);    
+
+#define FUN_VALUE(fun) do {                              \
+  std::string fun_name = #fun;                           \
+  std::cout << " " << fun_name << " : " << fun << "\n";  \
+} while(0)
 
 // stack 的遍历输出
 #define STACK_COUT(s) do {                       \
