@@ -4,10 +4,10 @@
 // map test : 测试 map, multimap 的接口与它们 insert 的性能
 
 #include <map>
+#include <iostream>
 
 #include "../src/map.h"
 #include "../src/vector.h"
-#include "test.h"
 
 namespace mystl
 {
@@ -15,6 +15,8 @@ namespace test
 {
 namespace map_test
 {
+
+#define PASSED    std::cout << "[ PASSED ]\n"
 
 // pair 的宏定义
 #define PAIR    mystl::pair<int, int>
@@ -40,6 +42,11 @@ namespace map_test
     std::string str = #fun; \
     auto it = fun; \
     std::cout << " " << str << " : <" << it.first << "," << it.second << ">\n"; \
+} while(0)
+
+#define FUN_VALUE(fun) do {                              \
+  std::string fun_name = #fun;                           \
+  std::cout << " " << fun_name << " : " << fun << "\n";  \
 } while(0)
 
 void map_test()
