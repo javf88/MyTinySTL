@@ -7,7 +7,6 @@
 #include <iostream>
 
 #include "../src/list.h"
-//#include "test.h"
 
 namespace mystl
 {

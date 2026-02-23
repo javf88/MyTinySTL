@@ -7,7 +7,6 @@
 #include <iostream>
 
 #include "../src/set.h"
-//#include "test.h"
 
 #define FUN_AFTER(con, fun) do {                         \
   std::string fun_name = #fun;                           \

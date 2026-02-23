@@ -8,7 +8,6 @@
 
 #include "../src/map.h"
 #include "../src/vector.h"
-//#include "test.h"
 
 namespace mystl
 {

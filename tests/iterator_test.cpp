@@ -1,7 +1,6 @@
 #ifndef MYTINYSTL_ITERATOR_TEST_H_
 #define MYTINYSTL_ITERATOR_TEST_H_
 
-//#include "test.h"
 #include <sstream>
 #include "../src/iterator.h"
 #include "../src/stream_iterator.h"

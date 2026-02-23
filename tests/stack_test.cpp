@@ -7,7 +7,6 @@
 #include <iostream>
 
 #include "../src/stack.h"
-//#include "test.h"
 
 namespace mystl
 {
