@@ -3,10 +3,10 @@
 
 // string test : 测试 string 的接口和 insert 的性能
 
+#include <gtest/gtest.h>
 #include <string>
 
-#include "../MyTinySTL/astring.h"
-#include "test.h"
+#include "../src/astring.h"
 
 namespace mystl
 {
@@ -14,6 +14,36 @@ namespace test
 {
 namespace string_test
 {
+
+#define STR_FUN_AFTER(str, fun) do {                     \
+  std::string fun_name = #fun;                           \
+  std::cout << " After " << fun_name << " :\n";          \
+  fun;                                                   \
+  STR_COUT(str);                                         \
+} while(0)
+
+#define FUN_VALUE(fun) do {                              \
+  std::string fun_name = #fun;                           \
+  std::cout << " " << fun_name << " : " << fun << "\n";  \
+} while(0)
+
+#define STR_COUT(str) do {                               \
+  std::string str_name = #str;                           \
+  std::cout << " " << str_name << " : " << str << "\n";  \
+} while(0)
+
+#define PASSED    std::cout << "[ PASSED ]\n"
+
+#define CON_TEST_P1(con, fun, arg, len1, len2, len3)         \
+  TEST_LEN(len1, len2, len3, WIDE);                          \
+  std::cout << "|         std         |";                    \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len1);                \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len2);                \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len3);                \
+  std::cout << "\n|        mystl        |";                  \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len1);              \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len2);              \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len3);    
 
 void string_test()
 {
@@ -204,4 +234,10 @@ void string_test()
 } // namespace string_test
 } // namespace test
 } // namespace mystl
+
+TEST(string,test)
+{
+    mystl::test::string_test::string_test();
+}
+
 #endif // !MYTINYSTL_STRING_TEST_H_

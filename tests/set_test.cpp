@@ -3,10 +3,44 @@
 
 // set test : 测试 set, multiset 的接口与它们 insert 的性能
 
+#include <gtest/gtest.h>
 #include <set>
+#include <iostream>
 
-#include "../MyTinySTL/set.h"
-#include "test.h"
+#include "../src/set.h"
+
+#define FUN_AFTER(con, fun) do {                         \
+  std::string fun_name = #fun;                           \
+  std::cout << " After " << fun_name << " :\n";          \
+  fun;                                                   \
+  COUT(con);                                             \
+} while(0)
+
+#define PASSED    std::cout << "[ PASSED ]\n"
+
+#define CON_TEST_P1(con, fun, arg, len1, len2, len3)         \
+  TEST_LEN(len1, len2, len3, WIDE);                          \
+  std::cout << "|         std         |";                    \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len1);                \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len2);                \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len3);                \
+  std::cout << "\n|        mystl        |";                  \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len1);              \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len2);              \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len3);    
+
+#define COUT(container) do {                             \
+  std::string con_name = #container;                     \
+  std::cout << " " << con_name << " :";                  \
+  for (auto it : container)                              \
+    std::cout << " " << it;                              \
+  std::cout << "\n";                                     \
+} while(0)
+
+#define FUN_VALUE(fun) do {                              \
+  std::string fun_name = #fun;                           \
+  std::cout << " " << fun_name << " : " << fun << "\n";  \
+} while(0)
 
 namespace mystl
 {
@@ -162,5 +196,11 @@ void multiset_test()
 } // namespace set_test
 } // namespace test
 } // namespace mystl
+
+TEST(set,test)
+{
+    mystl::test::set_test::set_test();
+    mystl::test::set_test::multiset_test();
+}
 #endif // !MYTINYSTL_SET_TEST_H_
 

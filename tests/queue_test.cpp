@@ -3,10 +3,11 @@
 
 // queue test : 测试 queue, priority_queue 的接口和它们 push 的性能
 
+#include <gtest/gtest.h>
 #include <queue>
+#include <iostream>
 
-#include "../MyTinySTL/queue.h"
-#include "test.h"
+#include "../src/queue.h"
 
 namespace mystl
 {
@@ -35,6 +36,11 @@ void p_queue_print(mystl::priority_queue<int> p)
   std::cout << std::endl;
 }
 
+#define FUN_VALUE(fun) do {                              \
+  std::string fun_name = #fun;                           \
+  std::cout << " " << fun_name << " : " << fun << "\n";  \
+} while(0)
+
 //  queue 的遍历输出
 #define QUEUE_COUT(q) do {                       \
     std::string q_name = #q;                     \
@@ -62,6 +68,8 @@ void p_queue_print(mystl::priority_queue<int> p)
   fun;                                           \
   P_QUEUE_COUT(con);                             \
 } while(0)
+
+#define PASSED    std::cout << "[ PASSED ]\n"
 
 void queue_test()
 {
@@ -182,5 +190,11 @@ void priority_test()
 } // namespace queue_test
 } // namespace test
 } // namespace mystl
+
+TEST(queue,test)
+{
+    mystl::test::queue_test::priority_test();
+    mystl::test::queue_test::queue_test();
+}
 #endif // !MYTINYSTL_QUEUE_TEST_H_
 

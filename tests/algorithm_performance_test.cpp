@@ -1,12 +1,20 @@
 ﻿#ifndef MYTINYSTL_ALGORITHM_PERFORMANCE_TEST_H_
 #define MYTINYSTL_ALGORITHM_PERFORMANCE_TEST_H_
 
-// 仅仅针对 sort, binary_search 做了性能测试
-
 #include <algorithm>
+#include <cstdlib>
+#include <ctime>
+#include <string>
+#include <sstream>
+#include <iostream>
+#include <iomanip>
+//#include "algo.h"
+#include <gtest/gtest.h>
 
-#include "../MyTinySTL/algorithm.h"
-#include "test.h"
+#define LEN1    10000
+#define LEN2    100000
+#define LEN3    1000000
+#define WIDE    14
 
 namespace mystl
 {
@@ -15,25 +23,33 @@ namespace test
 namespace algorithm_performance_test
 {
 
-// 函数性能测试宏定义
-#define FUN_TEST1(mode, fun, count) do {                      \
-    std::string fun_name = #fun;                               \
-    srand((int)time(0));                                       \
-    char buf[10];                                              \
-    clock_t start, end;                                        \
-    int *arr = new int[count];                                 \
-    for(size_t i = 0; i < count; ++i)  *(arr + i) = rand();    \
-    start = clock();                                           \
-    mode::fun(arr, arr + count);                               \
-    end = clock();                                             \
-    int n = static_cast<int>(static_cast<double>(end - start)  \
-        / CLOCKS_PER_SEC * 1000);                              \
-    std::snprintf(buf, sizeof(buf), "%d", n);                  \
-    std::string t = buf;                                       \
-    t += "ms   |";                                             \
-    std::cout << std::setw(WIDE) << t;                         \
-    delete []arr;                                              \
-} while(0)
+    /*
+void fun_test1(int mode, int count)
+{
+    clock_t start, end;
+    std::vector<int> vals;
+    srand(time(0));
+
+    for (int i = 0; i < count; ++i)
+        vals.push_back(rand());
+
+    if (mode == 0) // std := 0
+    {
+        start = clock();
+        std::sort(vals.begin(), vals.end());
+        end = clock();
+    }
+    else
+    {
+        start = clock();
+        mystl::sort(vals.begin(), vals.end());
+        end = clock();
+    }
+
+    double ms = end - start;
+    ms = ms / CLOCKS_PER_SEC * 1000;
+    std::cout << std::setw(WIDE) << ms << "ms    |";
+}
 
 #define FUN_TEST2(mode, fun, count) do {                      \
     std::string fun_name = #fun;                               \
@@ -55,11 +71,25 @@ namespace algorithm_performance_test
     delete []arr;                                              \
 } while(0)
 
+void test_len(size_t len1, size_t len2, size_t len3, size_t wide)
+{
+  std::string str1, str2, str3;
+  std::stringstream ss;
+  ss << len1 << " " << len2 << " " << len3;
+  ss >> str1 >> str2 >> str3;
+  str1 += "   |";
+  std::cout << std::setw(wide) << str1;
+  str2 += "   |";
+  std::cout << std::setw(wide) << str2;
+  str3 += "   |";
+  std::cout << std::setw(wide) << str3 << "\n";
+}
+
 void binary_search_test()
 {
   std::cout << "[------------------- function : binary_search ------------------]" << std::endl;
   std::cout << "| orders of magnitude |";
-  TEST_LEN(LEN1, LEN2, LEN3, WIDE);
+  test_len(LEN1, LEN2, LEN3, WIDE);
   std::cout << "|         std         |";
   FUN_TEST2(std, binary_search, LEN1);
   FUN_TEST2(std, binary_search, LEN2);
@@ -75,34 +105,25 @@ void sort_test()
 {
   std::cout << "[----------------------- function : sort -----------------------]" << std::endl;
   std::cout << "| orders of magnitude |";
-  TEST_LEN(LEN1, LEN2, LEN3, WIDE);
+  test_len(LEN1, LEN2, LEN3, WIDE);
   std::cout << "|         std         |";
-  FUN_TEST1(std, sort, LEN1);
-  FUN_TEST1(std, sort, LEN2);
-  FUN_TEST1(std, sort, LEN3);
+  fun_test1(0, LEN1);
+  fun_test1(0, LEN2);
+  fun_test1(0, LEN3);
   std::cout << std::endl << "|        mystl        |";
-  FUN_TEST1(mystl, sort, LEN1);
-  FUN_TEST1(mystl, sort, LEN2);
-  FUN_TEST1(mystl, sort, LEN3);
+  fun_test1(1, LEN1);
+  fun_test1(1, LEN2);
+  fun_test1(1, LEN3);
   std::cout << std::endl;
 }
-
-void algorithm_performance_test()
-{
-
-#if PERFORMANCE_TEST_ON
-  std::cout << "[===============================================================]" << std::endl;
-  std::cout << "[--------------- Run algorithm performance test ----------------]" << std::endl;
-  sort_test();
-  binary_search_test();
-  std::cout << "[--------------- End algorithm performance test ----------------]" << std::endl;
-  std::cout << "[===============================================================]" << std::endl;
-#endif // PERFORMANCE_TEST_ON
-
-}
-
+*/
 } // namespace algorithm_performance_test
 } // namespace test
 } // namespace mystl
+
+TEST(performacne, dummy)
+{
+    ASSERT_EQ(1,1);
+}
 #endif // !MYTINYSTL_ALGORITHM_PERFORMANCE_TEST_H_
 

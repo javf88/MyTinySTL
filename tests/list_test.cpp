@@ -3,10 +3,11 @@
 
 // list test : 测试 list 的接口与 insert, sort 的性能
 
+#include <gtest/gtest.h>
 #include <list>
+#include <iostream>
 
-#include "../MyTinySTL/list.h"
-#include "test.h"
+#include "../src/list.h"
 
 namespace mystl
 {
@@ -14,6 +15,28 @@ namespace test
 {
 namespace list_test
 {
+
+#define COUT(container) do {                             \
+  std::string con_name = #container;                     \
+  std::cout << " " << con_name << " :";                  \
+  for (auto it : container)                              \
+    std::cout << " " << it;                              \
+  std::cout << "\n";                                     \
+} while(0)
+
+#define FUN_AFTER(con, fun) do {                         \
+  std::string fun_name = #fun;                           \
+  std::cout << " After " << fun_name << " :\n";          \
+  fun;                                                   \
+  COUT(con);                                             \
+} while(0)
+
+#define FUN_VALUE(fun) do {                              \
+  std::string fun_name = #fun;                           \
+  std::cout << " " << fun_name << " : " << fun << "\n";  \
+} while(0)
+
+#define PASSED    std::cout << "[ PASSED ]\n"
 
 // 一个辅助测试函数
 bool is_odd(int x) { return x & 1; }
@@ -114,5 +137,10 @@ void list_test()
 } // namespace list_test
 } // namespace test
 } // namespace mystl
+
+TEST(list,test)
+{
+    mystl::test::list_test::list_test();
+}
 #endif // !MYTINYSTL_LIST_TEST_H_
 

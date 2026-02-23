@@ -1,9 +1,10 @@
 #ifndef MYTINYSTL_ITERATOR_TEST_H_
 #define MYTINYSTL_ITERATOR_TEST_H_
 
-#include "test.h"
-#include "../MyTinySTL/iterator.h"
-#include "../MyTinySTL/stream_iterator.h"
+#include <gtest/gtest.h>
+#include <sstream>
+#include "../src/iterator.h"
+#include "../src/stream_iterator.h"
 
 namespace mystl
 {
@@ -11,6 +12,8 @@ namespace test
 {
 namespace iterator_test
 {
+
+#define PASSED    std::cout << "[ PASSED ]\n"
 
 void stream_iterator_test()
 {
@@ -40,3 +43,7 @@ void stream_iterator_test()
 } // namespace mystl
 #endif // !MYTINYSTL_STREAM_ITERATOR_TEST_H_
 
+TEST(StreamIterator,test)
+{
+    mystl::test::iterator_test::stream_iterator_test();
+}

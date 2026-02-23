@@ -3,10 +3,11 @@
 
 // vector test : 测试 vector 的接口与 push_back 的性能
 
+#include <gtest/gtest.h>
 #include <vector>
 
-#include "../MyTinySTL/vector.h"
-#include "test.h"
+#include "../src/vector.h"
+#include <iostream>
 
 namespace mystl
 {
@@ -14,6 +15,39 @@ namespace test
 {
 namespace vector_test
 {
+
+#define COUT(container) do {                             \
+  std::string con_name = #container;                     \
+  std::cout << " " << con_name << " :";                  \
+  for (auto it : container)                              \
+    std::cout << " " << it;                              \
+  std::cout << "\n";                                     \
+} while(0)
+
+#define FUN_AFTER(con, fun) do {                         \
+  std::string fun_name = #fun;                           \
+  std::cout << " After " << fun_name << " :\n";          \
+  fun;                                                   \
+  COUT(con);                                             \
+} while(0)
+
+#define FUN_VALUE(fun) do {                              \
+  std::string fun_name = #fun;                           \
+  std::cout << " " << fun_name << " : " << fun << "\n";  \
+} while(0)
+
+#define CON_TEST_P1(con, fun, arg, len1, len2, len3)         \
+  TEST_LEN(len1, len2, len3, WIDE);                          \
+  std::cout << "|         std         |";                    \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len1);                \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len2);                \
+  FUN_TEST_FORMAT1(std::con, fun, arg, len3);                \
+  std::cout << "\n|        mystl        |";                  \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len1);              \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len2);              \
+  FUN_TEST_FORMAT1(mystl::con, fun, arg, len3);    
+
+#define PASSED    std::cout << "[ PASSED ]\n"
 
 void vector_test()
 {
@@ -110,5 +144,10 @@ void vector_test()
 } // namespace vector_test
 } // namespace test
 } // namespace mystl
+
+TEST(vector, test)
+{
+    mystl::test::vector_test::vector_test();
+}
 #endif // !MYTINYSTL_VECTOR_TEST_H_
 

@@ -3,11 +3,11 @@
 
 // unordered_map test : 测试 unordered_map, unordered_multimap 的接口与它们 insert 的性能
 
+#include <gtest/gtest.h>
+#include <iostream>
 #include <unordered_map>
 
-#include "../MyTinySTL/unordered_map.h"
-#include "map_test.h"
-#include "test.h"
+#include "../src/unordered_map.h"
 
 namespace mystl
 {
@@ -15,6 +15,35 @@ namespace test
 {
 namespace unordered_map_test
 {
+
+#define PAIR    mystl::pair<int, int>
+
+#define MAP_COUT(m) do { \
+    std::string m_name = #m; \
+    std::cout << " " << m_name << " :"; \
+    for (auto it : m)    std::cout << " <" << it.first << "," << it.second << ">"; \
+    std::cout << std::endl; \
+} while(0)
+
+#define MAP_FUN_AFTER(con, fun) do { \
+    std::string str = #fun; \
+    std::cout << " After " << str << " :" << std::endl; \
+    fun; \
+    MAP_COUT(con); \
+} while(0)
+
+#define MAP_VALUE(fun) do { \
+    std::string str = #fun; \
+    auto it = fun; \
+    std::cout << " " << str << " : <" << it.first << "," << it.second << ">\n"; \
+} while(0)
+
+#define FUN_VALUE(fun) do {                              \
+  std::string fun_name = #fun;                           \
+  std::cout << " " << fun_name << " : " << fun << "\n";  \
+} while(0)
+
+#define PASSED    std::cout << "[ PASSED ]\n"
 
 void unordered_map_test()
 {
@@ -199,5 +228,11 @@ void unordered_multimap_test()
 } // namespace unordered_map_test
 } // namespace test
 } // namespace mystl
+
+TEST(unorderedMap,test)
+{
+    mystl::test::unordered_map_test::unordered_map_test();
+    mystl::test::unordered_map_test::unordered_multimap_test();
+}
 #endif // !MYTINYSTL_UNORDERED_MAP_TEST_H_
 
