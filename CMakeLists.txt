@@ -9,6 +9,12 @@ project(MyTinySTL
     VERSION 2.0.1 # it was foraked at 2.0.0, 2.0.1 is buildsystem withour breaking APIs
     DESCRIPTION "A tiny stl library for C++17")
 
+# Includes
+include(CTest)
+
+# Build options
+set(CMAKE_EXPORT_COMPILE_COMMANDS "ON" CACHE BOOL "Export commands for lsp" FORCE)
+
 message(STATUS "Configuring ${PROJECT_NAME} v${PROJECT_VERSION}")
 
 # build type
